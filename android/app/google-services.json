@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "686272520501",
+    "project_id": "reactnative-f6020",
+    "storage_bucket": "reactnative-f6020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686272520501:android:b244e83a7518377ea6ec7c",
+        "android_client_info": {
+          "package_name": "com.maybank.treats.sg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686272520501-brdm27gqses3ap47ee4lfo4t421a87ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFxiX--deOUYOG21xxaXQ3TpJRsry2NiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686272520501-brdm27gqses3ap47ee4lfo4t421a87ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
