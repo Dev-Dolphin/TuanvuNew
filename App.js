@@ -17,13 +17,13 @@ import RegisterScreen from './component/RegisterScreen';
 import * as firebase from 'firebase';
 
 var firebaseConfig = {
-  apiKey: 'AIzaSyBUWiAAaXlXJz5oyJRPhc8Tui32q0YNxO8',
-  authDomain: 'tuanvu-project.firebaseapp.com',
-  projectId: 'tuanvu-project',
-  storageBucket: 'tuanvu-project.appspot.com',
-  messagingSenderId: '533055139038',
-  appId: '1:533055139038:web:22be85b0f5898d6d9e264f',
-  measurementId: 'G-DM6B4S47QS',
+  apiKey: 'AIzaSyDrmAClG2W0vz-Add9PxqvJ7YLnSdwkO9k',
+  authDomain: 'tuanvudev.firebaseapp.com',
+  projectId: 'tuanvudev',
+  storageBucket: 'tuanvudev.appspot.com',
+  messagingSenderId: '941508427193',
+  appId: '1:941508427193:web:f51accdf9b3ae28c924a68',
+  measurementId: 'G-SRGFD21V1R',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 
 export default class RegisterScreen extends Component {
   state = {
+    name: '',
     account: '',
     password: '',
     errorMessage: null,
@@ -37,10 +38,10 @@ export default class RegisterScreen extends Component {
               <Text style={styles.textTitle}>Name</Text>
               <TextInput
                 style={styles.textInput}
-                onChangeText={(account) => {
-                  this.setState({account});
+                onChangeText={(name) => {
+                  this.setState({name});
                 }}
-                value={this.state.account}
+                value={this.state.name}
                 autoCapitalize="none"
               />
             </View>

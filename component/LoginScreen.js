@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 // import { TextInput } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
-import analytics from '@react-native-firebase/analytics';
 
 export default class LoginScreen extends Component {
   state = {
@@ -21,6 +20,9 @@ export default class LoginScreen extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(account, password)
+      .then((succes) => {
+        console.log(succes);
+      })
       .catch((error) => {
         this.setState({errorMessage: error.message});
       });
@@ -46,15 +48,15 @@ export default class LoginScreen extends Component {
                 autoCapitalize="none"
               />
             </View>
-            <View style={{ marginTop: 60 }}>
-              <Text
-                style={styles.textTitle}
+            <View style={{marginTop: 60}}>
+              <Text style={styles.textTitle}>Password</Text>
+              <TextInput
+                style={styles.textInput}
                 onChangeText={(password) => {
                   this.setState({password});
-                }}>
-                Password
-              </Text>
-              <TextInput style={styles.textInput} autoCapitalize="none" />
+                }}
+                autoCapitalize="none"
+              />
             </View>
             <TouchableOpacity
               style={styles.buttonSign}
