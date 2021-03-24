@@ -15,6 +15,8 @@ import LoginScreen from './component/LoginScreen';
 import RegisterScreen from './component/RegisterScreen';
 
 import * as firebase from 'firebase';
+import {Provider} from 'react-redux';
+import store from './store/storeGlobal';
 
 var firebaseConfig = {
   apiKey: 'AIzaSyDrmAClG2W0vz-Add9PxqvJ7YLnSdwkO9k',
@@ -31,15 +33,21 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 class App extends Component {
   render() {
+    let auth = false;
+    firebase.auth().onAuthStateChanged((user) => {
+      user ? (auth = true) : (auth = false);
+    });
     return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Loading">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Loading" component={LoadingScreeen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Register" component={RegisterScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName={auth ? 'Home' : 'Login'}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Loading" component={LoadingScreeen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }

@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.maybank.treats.sg"
+//        applicationId "com.maybank.treats.sg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

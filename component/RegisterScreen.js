@@ -5,22 +5,60 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Modal,
+  Alert,
+  Pressable,
 } from 'react-native';
 // import { TextInput } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
+import LoadingScreeen from './LoadingScreeen';
 
 export default class RegisterScreen extends Component {
   state = {
-    name: '',
     account: '',
     password: '',
     errorMessage: null,
+    modalView: false,
+    indircator: false,
   };
-  submitForm = () => {
+  loginForm = () => {
+    this.props.navigation.navigate('Login');
+  };
+
+  alertModel() {
+    return (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={this.state.modalView}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          // this.setState({modalView: !this.state.modalView});
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => this.setState({modalView: !this.state.modalView})}>
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
+
+  register = () => {
+    this.setState({indircator: true});
     const {account, password} = this.state;
     firebase
       .auth()
-      .signInWithEmailAndPassword(account, password)
+      .createUserWithEmailAndPassword(account, password)
+      .then(() => {
+        this.setState({indircator: false});
+        this.setState({modalView: true});
+      })
       .catch((error) => {
         this.setState({errorMessage: error.message});
       });
@@ -35,17 +73,6 @@ export default class RegisterScreen extends Component {
           </View>
           <View style={styles.form}>
             <View style={styles.inputAccount}>
-              <Text style={styles.textTitle}>Name</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={(name) => {
-                  this.setState({name});
-                }}
-                value={this.state.name}
-                autoCapitalize="none"
-              />
-            </View>
-            <View style={styles.inputAccount}>
               <Text style={styles.textTitle}>Account</Text>
               <TextInput
                 style={styles.textInput}
@@ -57,24 +84,29 @@ export default class RegisterScreen extends Component {
               />
             </View>
             <View>
-              <Text
-                style={styles.textTitle}
+              <Text style={styles.textTitle}>Password</Text>
+              <TextInput
+                style={styles.textInput}
                 onChangeText={(password) => {
                   this.setState({password});
-                }}>
-                Password
-              </Text>
-              <TextInput style={styles.textInput} autoCapitalize="none" />
+                }}
+                autoCapitalize="none"
+              />
             </View>
             <TouchableOpacity
               style={styles.buttonSign}
-              onPress={this.submitForm}>
-              <Text style={styles.titleButton}>Sign In</Text>
+              onPress={this.loginForm}>
+              <Text style={styles.titleButton}>LogIn</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonRegister}>
-              <Text style={styles.titleButton}>Register</Text>
+            <TouchableOpacity
+              style={styles.buttonRegister}
+              onPress={this.register}>
+              <Text style={styles.titleButton}>
+                {this.state.indircator ? <LoadingScreeen /> : 'Register'}
+              </Text>
             </TouchableOpacity>
           </View>
+          {this.alertModel()}
         </View>
       </>
     );
@@ -129,5 +161,24 @@ const styles = StyleSheet.create({
   },
   titleButton: {
     color: '#ffffff',
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });

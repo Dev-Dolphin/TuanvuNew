@@ -21,7 +21,7 @@ export default class LoginScreen extends Component {
       .auth()
       .signInWithEmailAndPassword(account, password)
       .then((succes) => {
-        console.log(succes);
+        this.props.navigation.navigate('Home');
       })
       .catch((error) => {
         this.setState({errorMessage: error.message});
@@ -67,21 +67,6 @@ export default class LoginScreen extends Component {
               style={styles.buttonRegister}
               onPress={() => this.props.navigation.navigate('Register')}>
               <Text style={styles.titleButton}>Register</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.buttonRegister}
-              onPress={async () =>
-                await analytics()
-                  .logEvent('basket', {
-                    id: 3745092,
-                    item: 'mens grey t-shirt',
-                    description: ['round neck', 'long sleeved'],
-                    size: 'L',
-                  })
-                  .then(() => console.log('trantanvuNgon'))
-                  .catch()
-              }>
-              <Text style={styles.titleButton}>tesst</Text>
             </TouchableOpacity>
           </View>
         </View>
